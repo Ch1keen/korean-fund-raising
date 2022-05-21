@@ -53,15 +53,15 @@ contract GroupManager {
 
     function joinGroup(uint32 groupID) public returns(bool) {
         uint8 seat = 0;
-        for(uint i=0; i<10; i++){
-            if(groupToMembers[groupID] == "0x0000000000000000000000000000000000000000") break;
+        for(seat=0; seat<10; seat++){
+            if(groupToMembers[groupID][seat] == address(0)) break;
             seat++;
         }
         if(seat==10) {
             emit outOfLimit();
             return false;
         }
-        groupToMembers[seat] = msg.sender;
+        groupToMembers[groupID][seat] = msg.sender;
         return true;
     }
 
